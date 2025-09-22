@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LocationTheme {Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            LocationTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                 }
                 MyApp()
             }
