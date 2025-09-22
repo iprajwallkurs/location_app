@@ -3,6 +3,7 @@ package com.example.location
 import android.Manifest
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -20,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
 import com.example.location.ui.theme.LocationTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,12 +50,20 @@ fun LocationDisplay(
         onResult = { permissions ->
             if (permissions[Manifest.permission.ACCESS_COARSE_LOCATION]== true
                 && permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true){
-                //HAVE ACESS TO LOCATION
+                //Have access to Location
             }else{
                 //Ask for Permission
+                val rationalRequired = ActivityCompat.shouldShowRequestPermissionRationale(
+                    context as MainActivity,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )||ActivityCompat.shouldShowRequestPermissionRationale(
+                    context as MainActivity,  //we can use main activity here or not it doesn't matter because it was declared in the above segment
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+
+                }
             }
         })
-
 
 
     Column (modifier = Modifier.fillMaxSize(),
