@@ -20,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import com.example.location.ui.theme.LocationTheme
+import kotlinx.coroutines.sync.Mutex
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +33,18 @@ class MainActivity : ComponentActivity() {
         setContent {
             LocationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    )
                 }
+                MyApp()
             }
         }
     }
+}
+@Composable
+
+fun MyApp() {
+    val context = LocalContext.current
+    val locationUtils = LocationUtils(context)
+    LocationDisplay(locationUtils = locationUtils, context = context)
 }
 
 @Composable
@@ -62,12 +71,15 @@ fun LocationDisplay(
                 )
                 if (rationalRequired){
                     Toast.makeText(context,
-                        "Location permission is required for this feature",Toast.LENGTH_LONG).show()
-
+                        "Location permission is required for this feature",Toast.LENGTH_LONG)
+                        .show()
+                }else{
+                    Toast.makeText(context,
+                        "Location permission is required, Kindly enable it in android settings",
+                        Toast.LENGTH_LONG).show()
                 }
             }
         })
-
 
     Column (modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,6 +92,12 @@ fun LocationDisplay(
                 // Permission already granted update the location
             }else{
                 //Request location permission
+                requestPermissionLauncher.launch(
+                    arrayOf(
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
             }
         }) {
             Text("Get Location")
