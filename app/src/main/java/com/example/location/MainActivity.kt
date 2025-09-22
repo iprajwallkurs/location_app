@@ -60,6 +60,9 @@ fun LocationDisplay(
                     context as MainActivity,  //we can use main activity here or not it doesn't matter because it was declared in the above segment
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
+                if (rationalRequired){
+                    Toast.makeText(context,
+                        "Location permission is required for this feature",Toast.LENGTH_LONG).show()
 
                 }
             }
