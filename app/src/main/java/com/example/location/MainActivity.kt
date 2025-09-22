@@ -31,8 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LocationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            LocationTheme {Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                 }
                 MyApp()
             }
@@ -54,7 +53,6 @@ fun LocationDisplay(
     locationUtils: LocationUtils,
     context: Context
 ){
-
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions(),
         onResult = { permissions ->
