@@ -1,6 +1,7 @@
 package com.example.location
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -19,13 +20,14 @@ class LocationUtils (val context: Context) {
     private val _fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
 
-    @SupressLint("MissingPermission")
+    @SuppressLint("MissingPermission")
 
     fun requestLocationUpdates(viewModel: LocationViewModel){
         val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(LocationResult: LocationResult) {
+            // The parameter name should start with a lowercase letter
+            override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
-                locationResult.lastLocation?.lat{
+                locationResult.lastLocation?.let{
                     val location = LocationData(latitude = it.latitude, longitude = it.longitude)
                     viewModel.updateLocation(location)
                 }
