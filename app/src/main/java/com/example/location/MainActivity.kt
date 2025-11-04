@@ -32,11 +32,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val viewModel: LocationViewModel = viewModels()
+            val viewModel: LocationViewModel = viewModel()
             LocationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                 }
-                MyApp(viewModels)
+                MyApp(viewModel)
             }
         }
     }
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 
-fun MyApp(viewModel: LocationViewModel) {
+fun MyApp(viewModel: LocationViewModel){
     val context = LocalContext.current
     val locationUtils = LocationUtils(context)
     LocationDisplay(locationUtils = locationUtils,viewModel = viewModel, context = context)
