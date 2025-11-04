@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.location.ui.theme.LocationTheme
 
 
@@ -63,6 +64,7 @@ fun LocationDisplay(
             if (permissions[Manifest.permission.ACCESS_COARSE_LOCATION]== true
                 && permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true){
                 //Have access to Location
+
             }else{
                 //Ask for Permission
                 val rationalRequired = ActivityCompat.shouldShowRequestPermissionRationale(
