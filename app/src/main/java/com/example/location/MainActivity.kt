@@ -101,8 +101,6 @@ fun LocationDisplay(
             Text("Location not available")
         }
 
-        Text("Location not available")
-
         Button(onClick = {
             if (locationUtils.hasLocationPermission(context)){
                 // Permission already granted update the location

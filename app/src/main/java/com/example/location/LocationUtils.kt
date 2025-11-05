@@ -38,7 +38,6 @@ class LocationUtils (val context: Context) {
         _fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
-
     fun hasLocationPermission(context: Context) : Boolean{
 
         return ContextCompat.checkSelfPermission(
