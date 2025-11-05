@@ -39,7 +39,6 @@ class LocationUtils (val context: Context) {
     }
 
 
-
     fun hasLocationPermission(context: Context) : Boolean{
 
         return ContextCompat.checkSelfPermission(
